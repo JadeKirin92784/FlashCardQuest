@@ -73,3 +73,6 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+#Custom Gems not included in LeWagon Min + Devise
+gem "dotenv-rails"
