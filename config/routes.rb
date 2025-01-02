@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root to: "pages#home"
 
-  resources :flashcards, only: [:index, :show, :create, :destroy]
+  resources :flashcards, only: [:index, :show, :new, :create, :destroy]
   resources :decks, only: [:index, :create, :show, :new, :create, :destroy]
   resources :user_decks, only: [:index, :update, :destroy]
 

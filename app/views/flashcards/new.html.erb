@@ -1,0 +1,7 @@
+<h1> Add the info below <h1>
+
+<%= simple_form_for @flashcard do |f| %>
+ <%= f.input :question, label: "Enter your question" %>   
+ <%= f.input :answer, label: "Enter your answer" %>
+ <%= f.button :submit, "Make new card!" %> 
+<% end %>
