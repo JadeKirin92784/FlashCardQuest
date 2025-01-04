@@ -1,5 +1,6 @@
 class DecksController < ApplicationController
   def index
+    @all_decks = Deck.all
     @decks = current_user.decks
   end
 

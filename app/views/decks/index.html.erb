@@ -1,11 +1,11 @@
 <h1> Here are some decks to choose from! </h1>
 
 <h2>Choose a deck to practice</h2>
-<% if @decks.empty? %>
+<% if @all_decks.empty? %>
 <%= link_to "You don't seem to have any decks yet. Let's make a new deck!", new_deck_path %>
 <% else %> 
-  <% @decks.each do |deck| %>
-    <%= deck.topic %>
+  <% @all_decks.each do |deck| %>
+    <%= link_to "#{deck.topic}", deck_path(deck) %>
   <% end %>
   <%= link_to "Make a new deck", new_deck_path %>
 <% end %>  
