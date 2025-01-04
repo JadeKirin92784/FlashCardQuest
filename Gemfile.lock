@@ -149,6 +149,7 @@ GEM
       sassc (~> 2.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    htmlbeautifier (1.4.3)
     http-accept (1.7.0)
     http-cookie (1.0.7)
       domain_name (~> 0.5)
@@ -342,6 +343,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   font-awesome-sass (~> 6.1)
+  htmlbeautifier
   importmap-rails
   jbuilder
   pg (~> 1.1)

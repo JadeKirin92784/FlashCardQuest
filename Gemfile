@@ -77,3 +77,4 @@ end
 #Custom Gems not included in LeWagon Min + Devise
 gem "dotenv-rails"
 gem 'cloudinary', '~> 1.16.0'
+gem 'htmlbeautifier'
