@@ -12,6 +12,6 @@ Rails.application.routes.draw do
 
   resources :flashcards, only: [:index, :show, :new, :create, :destroy]
   resources :decks, only: [:index, :create, :show, :new, :create, :destroy]
-  resources :user_decks, only: [:index, :update, :destroy]
+  resources :user_decks, only: [:index, :update, :destroy, :show]
 
 end
