@@ -1,21 +1,26 @@
 <% if @deck.flashcards.empty? %>
   <p><%= link_to "This deck has no cards. Let's add some!", edit_deck_path %></p>
 <% else %>
-  <% @deck.flashcards.each do |card| %>
-    <div class="flashcard-container" data-controller="flashcard">
-      <div class="flashcard" id="flashcard" data-flashcard-target="card">
+  <div class="flashcard-container" data-controller="flashcard">
+    <% @deck.flashcards.each_with_index do |card, index| %>
+      <div class="flashcard" 
+           data-flashcard-target="card" 
+           data-index="<%= index %>" 
+           style="<%= index == 0 ? '' : 'display: none;' %>">
         <div class="front">
           <h2>Question</h2>
-          <p> <%= card.question %> </p>
+          <p><%= card.question %></p>
         </div>
         <div class="back">
           <h2>Answer</h2>
-          <p>  <%= card.answer %>  </p>
+          <p><%= card.answer %></p>
         </div>
+        
       </div>
-    <button class="btn btn-primary" data-action="click->flashcard#flip">Flip Card</button>
-    </div>
-  <% end %>  
+    <% end %>
+    <button class="btn btn-primary" data-action="click->flashcard#flip" data-flashcard-target="flipButton">Flip Card</button>
+    <button class="btn btn-secondary mt-3" data-action="click->flashcard#nextCard">Next Card</button>
+  </div>
 <% end %>
 
 <%= link_to "Go back to your decks", decks_path, class: "btn btn-primary" %>
@@ -27,6 +32,3 @@
   </div>
   <button class="btn btn-primary" data-action="click->timer#start">Start Timer</button>
 </div>
-
-
-
