@@ -1,10 +1,12 @@
-<h1> <%= @deck.topic %> <h1>
 <% if @deck.flashcards.empty? %>
-<%= link_to "This deck has no cards. Let's add some!", edit_deck_path %>
+  <p><%= link_to "This deck has no cards. Let's add some!", edit_deck_path %></p>
 <% else %>
   <% @deck.flashcards.each do |card| %>
-    <%= card.question %>
+    <div data-controller="toggle-answer">
+      <p class="question" style="cursor: pointer;" data-action="click->toggle-answer#toggle"><%= card.question %></p>
+      <p class="answer hidden" data-toggle-answer-target="answer"><%= card.answer %></p>
+    </div>
   <% end %>
 <% end %>
 
-<%= link_to "Go back to your decks", decks_path %>
+<%= link_to "Go back to your decks", decks_path, class: "btn btn-primary" %>

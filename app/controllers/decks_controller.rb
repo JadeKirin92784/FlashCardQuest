@@ -14,7 +14,8 @@ class DecksController < ApplicationController
     if @deck.save 
       redirect_to deck_path(@deck)
     else
-      raise #shouldn't get here
+      flash[:error] = "There was a problem making the deck."
+      render :new
     end
   end 
 
@@ -25,6 +26,12 @@ class DecksController < ApplicationController
 
   def update
     @deck = Deck.find(params[:id])
+    flashcards_ids = params[:deck][:flashcard_ids].reject(&:empty?)
+    new_flashcards = Flashcard.where(id: flashcards_ids)
+    new_flashcards.each do |card|
+      @deck.flashcards << card unless @deck.flashcards.include?(card)
+    end
+
     if @deck.update(deck_params)
       flash[:success] = "Deck updated successfully"
       redirect_to @deck

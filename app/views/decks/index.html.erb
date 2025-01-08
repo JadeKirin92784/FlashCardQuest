@@ -5,7 +5,14 @@
 <%= link_to "You don't seem to have any decks yet. Let's make a new deck!", new_deck_path %>
 <% else %> 
   <% @all_decks.each do |deck| %>
-    <%= link_to "#{deck.topic}", deck_path(deck) %>
+    <div class="cards">
+    <div class="card-deck">
+      <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+      <div class="card-deck-infos">
+        <h2> <%= link_to "#{deck.topic}", deck_path(deck) %> </h2>
+      </div>
+    </div>
+  </div>
   <% end %>
-  <%= link_to "Make a new deck", new_deck_path %>
+  <%= link_to "Make a new deck", new_deck_path, class: "btn btn-primary" %>
 <% end %>  
