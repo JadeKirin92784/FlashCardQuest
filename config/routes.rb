@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   resources :flashcards, only: [:index, :show, :new, :create, :destroy]
-  resources :decks, only: [:index, :create, :show, :new, :create, :destroy]
+  resources :decks, only: [:index, :show, :new, :create, :destroy, :edit, :update]
   resources :user_decks, only: [:index, :update, :destroy, :show]
 
 end

@@ -1,0 +1,11 @@
+<h1>Let's add or remove some cards to <%= @deck.topic %>! </h1>
+
+<%= simple_form_for @deck, url: deck_path(@deck), method: :patch do |f| %>
+  <% @flashcards.each do |card| %>
+    <div class="form-check">
+      <%= f.input :flashcard_ids, as: :check_boxes, collection: [card.id], label: "#{card.question} - #{card.answer}", wrapper_html: { class: 'form-check' } %>
+    </div>
+  <% end %>
+
+  <%= f.button :submit, 'Add to the deck!', class: 'btn btn-primary' %>
+<% end %>

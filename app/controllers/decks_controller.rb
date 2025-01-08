@@ -18,12 +18,28 @@ class DecksController < ApplicationController
     end
   end 
 
+  def edit
+    @deck = Deck.find(params[:id])
+    @flashcards = Flashcard.all
+  end
+
+  def update
+    @deck = Deck.find(params[:id])
+    if @deck.update(deck_params)
+      flash[:success] = "Deck updated successfully"
+      redirect_to @deck
+    else
+      flash[:error] = "There was a problem updating the deck."
+      render :edit
+    end
+  end  
+
   def show
     @deck = Deck.find(params[:id])
   end
 
   def deck_params
-    params.require(:deck).permit(:topic)
+    params.require(:deck).permit(:topic, flashcards_ids: [])
   end
   
 end

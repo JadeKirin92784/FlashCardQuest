@@ -1,6 +1,8 @@
 class Flashcard < ApplicationRecord
   validates :question, presence: true
   validates :answer, presence: true
+  has_many :deck_cards
+  has_many :decks, through: :deck_cards
 
   after_initialize :init
 

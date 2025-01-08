@@ -1,9 +1,10 @@
 <h1> <%= @deck.topic %> <h1>
 <% if @deck.flashcards.empty? %>
-<p> This deck has no cards. Let's add some!<p>
+<%= link_to "This deck has no cards. Let's add some!", edit_deck_path %>
 <% else %>
   <% @deck.flashcards.each do |card| %>
     <%= card.question %>
   <% end %>
 <% end %>
+
 <%= link_to "Go back to your decks", decks_path %>
