@@ -19,3 +19,17 @@
   <button class="btn btn-primary" data-action="click->timer#start">Start Timer</button>
 </div>
 
+<div class="flashcard-container" data-controller="flashcard">
+  <div class="flashcard" id="flashcard" data-flashcard-target="card">
+    <div class="front">
+      <h2>Question</h2>
+      <p>What is the capital of France?</p>
+    </div>
+    <div class="back">
+      <h2>Answer</h2>
+      <p>Paris</p>
+    </div>
+  </div>
+  <button data-action="click->flashcard#flip">Flip Card</button>
+</div>
+
