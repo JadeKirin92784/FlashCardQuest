@@ -45,6 +45,12 @@ class DecksController < ApplicationController
     @deck = Deck.find(params[:id])
   end
 
+  def quiz
+    @deck = Deck.find(params[:id])
+    @flashcards = @deck.flashcards
+    # Add any additional logic you need for the quiz view
+  end
+
   def deck_params
     params.require(:deck).permit(:topic, flashcards_ids: [])
   end

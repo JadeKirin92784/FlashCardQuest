@@ -1,0 +1,10 @@
+<h1>Quiz for <%= @deck.topic %></h1>
+
+<% @flashcards.each do |flashcard| %>
+  <div class="flashcard">
+    <p><strong>Question:</strong> <%= flashcard.question %></p>
+    <!-- Add logic for answers or interactivity -->
+  </div>
+<% end %>
+
+<%= link_to "Back to Deck", deck_path(@deck), class: "btn btn-secondary" %>

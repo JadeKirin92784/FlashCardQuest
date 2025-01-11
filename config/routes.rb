@@ -11,7 +11,14 @@ Rails.application.routes.draw do
   root to: "pages#home"
 
   resources :flashcards, only: [:index, :show, :new, :create, :destroy]
-  resources :decks, only: [:index, :show, :new, :create, :destroy, :edit, :update]
+  resources :decks, only: [:index, :show, :new, :create, :destroy, :edit, :update] do
+    member do 
+      get :quiz
+    end
+  end
+  
   resources :user_decks, only: [:index, :update, :destroy, :show]
+
+  get 'decks/:id/quiz', to: 'decks#quiz', as: :deck_quiz
 
 end
