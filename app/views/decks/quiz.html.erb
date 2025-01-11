@@ -1,10 +1,24 @@
-<h1>Quiz for <%= @deck.topic %></h1>
+<div data-controller="quiz">
+  <% @flashcards.each_with_index do |flashcard, index| %>
+    <div class="flashcard" data-quiz-index="<%= index %>" style="<%= index == 0 ? '' : 'display: none;' %>">
+      <p><strong>Question:</strong> <%= flashcard.question %></p>
+      <ul class="answers">
+        <% # Build the pool of answers and ensure they are unique %>
+        <% pool_of_answers = (@flashcards.map(&:answer) + ["Answer A", "Answer B", "Answer C", "Answer D", "Answer E", "Answer F"]).uniq %>
+        <% answers = (pool_of_answers.sample(5) + [flashcard.answer]).uniq.shuffle %> <!-- Ensure correct answer is included, unique, and shuffled -->
+        <% answers.each do |answer| %>
+          <li>
+            <button class="answer-btn" data-answer="<%= answer %>" data-correct="<%= flashcard.answer == answer %>">
+              <%= answer %>
+            </button>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<% @flashcards.each do |flashcard| %>
-  <div class="flashcard">
-    <p><strong>Question:</strong> <%= flashcard.question %></p>
-    <!-- Add logic for answers or interactivity -->
+  <div>
+    <p>Correct Answers: <span data-quiz-target="correctCount">0</span></p>
+    <p>Incorrect Answers: <span data-quiz-target="incorrectCount">0</span></p>
   </div>
-<% end %>
-
-<%= link_to "Back to Deck", deck_path(@deck), class: "btn btn-secondary" %>
+</div>
