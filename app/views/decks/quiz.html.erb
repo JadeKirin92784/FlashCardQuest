@@ -1,11 +1,16 @@
-<div data-controller="quiz">
+<div data-controller="quiz" data-quiz-total-flashcards="<%= @total_flashcards %>">  
+  <div> <span data-quiz-target="timer">10</span> seconds left </div>
+  <p>Remaining Flashcards: <span data-quiz-target="remainingCount">0</span></p>
+  <p class="current-score">Current Score: 0</p> <!-- New Score Display -->
+
   <% @flashcards.each_with_index do |flashcard, index| %>
     <div class="flashcard" data-quiz-index="<%= index %>" style="<%= index == 0 ? '' : 'display: none;' %>">
       <p><strong>Question:</strong> <%= flashcard.question %></p>
       <ul class="answers">
-        <% # Build the pool of answers and ensure they are unique %>
-        <% pool_of_answers = (@flashcards.map(&:answer) + ["Answer A", "Answer B", "Answer C", "Answer D", "Answer E", "Answer F"]).uniq %>
-        <% answers = (pool_of_answers.sample(5) + [flashcard.answer]).uniq.shuffle %> <!-- Ensure correct answer is included, unique, and shuffled -->
+        <% current_deck_answers = @deck.flashcards.map(&:answer) - [flashcard.answer] %>
+        <% other_answers = current_deck_answers.size >= 5 ? current_deck_answers : (@flashcards.map(&:answer) - [flashcard.answer]) %>
+        <% random_answers = other_answers.sample(5) %>
+        <% answers = (random_answers + [flashcard.answer]).shuffle %>
         <% answers.each do |answer| %>
           <li>
             <button class="answer-btn" data-answer="<%= answer %>" data-correct="<%= flashcard.answer == answer %>">
@@ -20,5 +25,10 @@
   <div>
     <p>Correct Answers: <span data-quiz-target="correctCount">0</span></p>
     <p>Incorrect Answers: <span data-quiz-target="incorrectCount">0</span></p>
+  </div>
+
+  <!-- Quit Quiz Button as a Stimulus target -->
+  <div>
+    <button class="btn btn-danger" data-quiz-target="quitButton" data-action="click->quiz#quitQuiz">Quit Quiz</button>
   </div>
 </div>

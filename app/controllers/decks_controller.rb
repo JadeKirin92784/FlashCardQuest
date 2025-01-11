@@ -43,6 +43,8 @@ class DecksController < ApplicationController
 
   def show
     @deck = Deck.find(params[:id])
+    @flashcards = @deck.flashcards
+    @total_flashcards = @flashcards.count
   end
 
   def quiz
