@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   resources :decks, only: [:index, :show, :new, :create, :destroy, :edit, :update] do
     member do 
       get :quiz
+      delete 'remove_flashcard/:flashcard_id', to: 'decks#remove_flashcard', as: 'remove_flashcard'
+      patch 'add_flashcards'
+      patch 'remove_flashcards'
     end
   end
   

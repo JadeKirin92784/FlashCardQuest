@@ -1,11 +1,19 @@
-<h1>Let's add or remove some cards to <%= @deck.topic %>! </h1>
+<h1>Let's add some cards to <%= @deck.topic %>!</h1>
 
-<%= simple_form_for @deck, url: deck_path(@deck), method: :patch do |f| %>
-  <% @flashcards.each do |card| %>
-    <div class="form-check">
-      <%= f.input :flashcard_ids, as: :check_boxes, collection: [card.id], label: "#{card.question} - #{card.answer}", wrapper_html: { class: 'form-check' } %>
-    </div>
-  <% end %>
-
-  <%= f.button :submit, 'Add to the deck!', class: 'btn btn-primary' %>
+<%= simple_form_for @deck, url: add_flashcards_deck_path(@deck), method: :patch, data: { controller: "toggle-list" } do |f| %>
+  <!-- Button to toggle the "Add Flashcard" list -->
+  <button type="button" class="btn btn-secondary" data-action="click->toggle-list#toggleAddList">Add a flashcard</button>
+  
+  <!-- Display All Available Flashcards -->
+  <div id="add-list" data-toggle-list-target="addList" class="flashcard-list d-none">
+    <h2>Available Flashcards:</h2>
+    <%= f.input :flashcard_ids, 
+                collection: @available_flashcards, 
+                as: :check_boxes, 
+                label_method: ->(card) { "#{card.question} - #{card.answer}" }, 
+                value_method: :id,
+                input_html: { class: "form-check-input" },
+                item_wrapper_class: "form-check" %>
+    <%= f.submit 'Add selected cards', class: 'btn btn-primary mt-3' %>
+  </div>
 <% end %>

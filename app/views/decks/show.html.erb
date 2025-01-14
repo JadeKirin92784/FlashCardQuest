@@ -1,3 +1,4 @@
+<h1><%= @deck.topic %> Deck</h1>
 <% if @deck.flashcards.empty? %>
   <p><%= link_to "This deck has no cards. Let's add some!", edit_deck_path %></p>
 <% else %>
@@ -30,4 +31,6 @@
 
 <%= link_to "Go back to your decks", decks_path, class: "btn btn-primary" %>
 
-<%= link_to "Take a quiz with this deck!", deck_quiz_path, class: "btn btn-primary" %>
+<%= link_to "Take a quiz with this deck", deck_quiz_path, class: "btn btn-primary" %>
+
+<%= link_to "Add/Remove cards", edit_deck_path, class: "btn btn-primary" %>
