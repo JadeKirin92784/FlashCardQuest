@@ -10,16 +10,21 @@
         <div class="front">
           <h2>Question</h2>
           <p><%= card.question %></p>
+          <div class="buttons">
+            <button class="btn btn-primary" data-action="click->flashcard#flip" data-flashcard-target="flipButton">Flip Card</button>
+            <button class="btn btn-secondary" data-action="click->flashcard#nextCard">Next Card</button>
+          </div>
         </div>
         <div class="back">
           <h2>Answer</h2>
           <p><%= card.answer %></p>
+          <div class="buttons">
+            <button class="btn btn-primary" data-action="click->flashcard#flip" data-flashcard-target="flipButton">Flip Card</button>
+            <button class="btn btn-secondary" data-action="click->flashcard#nextCard">Next Card</button>
+          </div>
         </div>
-        
       </div>
     <% end %>
-    <button class="btn btn-primary" data-action="click->flashcard#flip" data-flashcard-target="flipButton">Flip Card</button>
-    <button class="btn btn-secondary mt-3" data-action="click->flashcard#nextCard">Next Card</button>
   </div>
 <% end %>
 
